@@ -830,13 +830,19 @@ async function checkSentence(btn, word, def) {
       body: JSON.stringify({ word, def, sentence })
     });
     const data = await res.json();
-    const text = data.text || 'Sorry, no response received.';
-    const correct = /^yes/i.test(text.trim());
-    result.textContent = text;
-    result.classList.add(correct ? 'correct' : 'incorrect');
-    result.style.display = 'block';
+    if (!res.ok) {
+      result.textContent = 'Error: ' + (data.error || 'Unknown error') + (data.detail ? ' — ' + data.detail : '');
+      result.classList.add('incorrect');
+      result.style.display = 'block';
+    } else {
+      const text = data.text || 'No response text received.';
+      const correct = /^yes/i.test(text.trim());
+      result.textContent = text;
+      result.classList.add(correct ? 'correct' : 'incorrect');
+      result.style.display = 'block';
+    }
   } catch (e) {
-    result.textContent = 'Something went wrong. Please try again.';
+    result.textContent = 'Network error: ' + e.message;
     result.classList.add('incorrect');
     result.style.display = 'block';
   }
