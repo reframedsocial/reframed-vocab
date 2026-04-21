@@ -18,11 +18,7 @@ exports.handler = async function (event) {
 
   const apiKey = process.env.GEMINI_KEY;
   if (!apiKey) {
-    return { statusCode: 500, body: JSON.stringify({ error: 'GEMINI_KEY environment variable not set', keyPreview: 'undefined' }) };
-  }
-  // DEBUG: remove after confirming env var is set
-  if (apiKey.length < 10) {
-    return { statusCode: 500, body: JSON.stringify({ error: 'GEMINI_KEY looks malformed', keyPreview: apiKey.slice(0, 4), keyLength: apiKey.length }) };
+    return { statusCode: 500, body: JSON.stringify({ error: 'GEMINI_KEY environment variable not set' }) };
   }
 
   const prompt = `The user is learning the word "${word}" which means "${def}". They wrote this sentence: "${sentence}". Did they use the word correctly? Reply in 2-3 sentences max — start with Yes or No, then briefly explain why. Be encouraging and specific.`;
@@ -52,10 +48,9 @@ exports.handler = async function (event) {
     });
 
     if (geminiStatus !== 200) {
-      console.error('Gemini API error', geminiStatus, geminiBody);
       return {
         statusCode: 502,
-        body: JSON.stringify({ error: `Gemini returned ${geminiStatus}`, keyPreview: apiKey.slice(0, 4), detail: geminiBody })
+        body: JSON.stringify({ error: `Gemini returned ${geminiStatus}`, detail: geminiBody })
       };
     }
 
@@ -63,7 +58,6 @@ exports.handler = async function (event) {
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!text) {
-      console.error('Unexpected Gemini response shape', geminiBody);
       return { statusCode: 502, body: JSON.stringify({ error: 'No text in Gemini response', detail: geminiBody }) };
     }
 
@@ -73,7 +67,6 @@ exports.handler = async function (event) {
       body: JSON.stringify({ text })
     };
   } catch (e) {
-    console.error('Function error', e);
     return { statusCode: 500, body: JSON.stringify({ error: e.message }) };
   }
 };
