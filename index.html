@@ -71,7 +71,11 @@
     display: flex;
     padding: 0 2rem;
     gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .tabs-bar::-webkit-scrollbar { display: none; }
   .tab-btn {
     background: none;
     border: none;
@@ -84,6 +88,8 @@
     cursor: pointer;
     transition: all 0.15s;
     margin-bottom: -1px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .tab-btn:hover { color: var(--charcoal); }
   .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
@@ -244,6 +250,136 @@
     color: #c0567a; font-size: 14px; line-height: 1.7;
   }
 
+  /* GRAMMAR REFERENCE */
+  .grammar-intro {
+    font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 1.5rem;
+  }
+  .accordion-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .accordion-header:hover { background: var(--gray); }
+  .accordion-header-left { display: flex; align-items: center; gap: 12px; }
+  .accordion-icon { font-size: 18px; }
+  .accordion-title { font-size: 15px; font-weight: 600; color: var(--charcoal); }
+  .accordion-chevron {
+    font-size: 11px; color: #999;
+    display: inline-block;
+    transition: transform 0.25s;
+  }
+  .accordion-item.open .accordion-chevron { transform: rotate(180deg); }
+  .accordion-body {
+    display: none;
+    padding: 0 1.5rem 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .accordion-item.open .accordion-body { display: block; }
+  .gr-section { margin-top: 1.25rem; }
+  .gr-heading {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 8px;
+  }
+  .gr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .gr-table th {
+    text-align: left; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: #999; padding: 6px 10px; border-bottom: 1px solid var(--border);
+  }
+  .gr-table td {
+    padding: 8px 10px; border-bottom: 1px solid #f0f4fa;
+    line-height: 1.55; color: var(--charcoal); vertical-align: top;
+  }
+  .gr-table tr:last-child td { border-bottom: none; }
+  .gr-table td:first-child { font-weight: 600; color: var(--blue); white-space: nowrap; }
+  .gr-list { list-style: none; padding: 0; }
+  .gr-list li {
+    font-size: 13px; line-height: 1.7; color: var(--charcoal);
+    padding: 5px 0 5px 14px;
+    border-left: 2px solid var(--blue-mid);
+    margin-bottom: 6px;
+  }
+  .gr-list li strong { color: var(--blue); }
+  .gr-note {
+    font-size: 12px; color: #777; font-style: italic;
+    background: #FAFAFA;
+    border-left: 3px solid var(--olive);
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 12px;
+    line-height: 1.65;
+  }
+  .gr-example {
+    font-size: 13px; color: #555;
+    background: var(--blue-light);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    line-height: 1.7;
+  }
+
+  /* FIX THE SENTENCE */
+  .fix-wrap { max-width: 580px; margin: 0 auto; }
+  .fix-stats { display: flex; gap: 10px; margin-bottom: 1.25rem; }
+  .fix-progress-bar-wrap { background: var(--blue-light); border-radius: 20px; height: 6px; margin-bottom: 1.5rem; overflow: hidden; }
+  .fix-progress-bar-fill { background: var(--blue); height: 100%; border-radius: 20px; transition: width 0.5s ease; }
+  .fix-q-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--olive); margin-bottom: 10px; }
+  .fix-sentence-box {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--charcoal);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+  .fix-instruction { font-size: 13px; color: #888; margin-bottom: 1rem; }
+  .fix-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1rem; }
+  .fix-opt {
+    background: white; border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 14px 18px;
+    font-size: 14px; line-height: 1.5; cursor: pointer;
+    text-align: left; font-family: 'DM Sans', sans-serif;
+    color: var(--charcoal); transition: all 0.15s;
+  }
+  .fix-opt:hover:not(:disabled) { border-color: var(--blue); background: var(--blue-light); }
+  .fix-opt.correct { border-color: var(--olive); background: var(--olive-light); color: var(--olive); font-weight: 500; }
+  .fix-opt.wrong { border-color: var(--pink); background: var(--pink-light); color: #b0446a; }
+  .fix-feedback { font-size: 14px; line-height: 1.65; min-height: 44px; color: var(--charcoal); margin-bottom: 0.75rem; }
+  .fix-next-btn {
+    display: none; background: var(--blue); color: white;
+    border: none; border-radius: 10px; padding: 11px 30px;
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: background 0.15s;
+  }
+  .fix-next-btn:hover { background: #0050a0; }
+  .fix-next-btn.visible { display: inline-block; }
+  .fix-complete {
+    text-align: center; padding: 2.5rem 1rem;
+  }
+  .fix-complete-score { font-size: 52px; font-weight: 600; color: var(--blue); margin-bottom: 0.5rem; }
+  .fix-complete-label { font-size: 15px; color: #666; margin-bottom: 1.75rem; line-height: 1.6; }
+  .fix-restart-btn {
+    background: var(--blue); color: white;
+    border: none; border-radius: 10px; padding: 12px 32px;
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: background 0.15s;
+  }
+  .fix-restart-btn:hover { background: #0050a0; }
+
   @media (max-width: 600px) {
     header { padding: 1rem; }
     main { padding: 1.25rem 1rem; }
@@ -251,6 +387,8 @@
     .tab-btn { padding: 12px 14px; font-size: 13px; }
     .fc-card-outer { height: 240px; }
     .fc-word-big { font-size: 26px; }
+    .fix-sentence-box { font-size: 15px; }
+    .gr-table td:first-child { white-space: normal; }
   }
 </style>
 </head>
@@ -271,9 +409,12 @@
   <button class="tab-btn active" onclick="showTab('library', this)">Library</button>
   <button class="tab-btn" onclick="showTab('flashcards', this)">Flashcards</button>
   <button class="tab-btn" onclick="showTab('quiz', this)">Quiz</button>
+  <button class="tab-btn" onclick="showTab('grammar', this)">Grammar Reference</button>
+  <button class="tab-btn" onclick="showTab('fix', this)">Fix the Sentence</button>
 </div>
 
 <main>
+
   <!-- LIBRARY -->
   <div class="section active" id="tab-library">
     <div class="loading" id="library-loading">Loading your words<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
@@ -324,6 +465,258 @@
       <button class="quiz-next-btn" id="q-next" onclick="nextQuestion()">Next word →</button>
     </div>
   </div>
+
+  <!-- GRAMMAR REFERENCE -->
+  <div class="section" id="tab-grammar">
+    <p class="grammar-intro">A quick-reference guide to the building blocks of clear, confident writing. Tap any section to expand it.</p>
+
+    <div class="accordion-item" id="acc-pos">
+      <div class="accordion-header" onclick="toggleAccordion('acc-pos')">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">🔤</span>
+          <span class="accordion-title">Parts of Speech</span>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="gr-section">
+          <table class="gr-table">
+            <tr><th>Part</th><th>Role</th><th>Examples</th></tr>
+            <tr><td>Noun</td><td>Names a person, place, thing, or idea</td><td>London, freedom, team, cat</td></tr>
+            <tr><td>Verb</td><td>Expresses action or state of being</td><td>run, is, have, should</td></tr>
+            <tr><td>Adjective</td><td>Modifies a noun or pronoun</td><td>blue, tall, three, the</td></tr>
+            <tr><td>Adverb</td><td>Modifies a verb, adjective, or other adverb</td><td>quickly, very, often, well</td></tr>
+            <tr><td>Pronoun</td><td>Replaces a noun</td><td>I, you, he, its, who, myself</td></tr>
+            <tr><td>Preposition</td><td>Shows relationship between words</td><td>in, on, at, by, for, with</td></tr>
+            <tr><td>Conjunction</td><td>Connects words, phrases, or clauses</td><td>and, but, because, although</td></tr>
+            <tr><td>Interjection</td><td>Expresses emotion — use sparingly</td><td>Oh! Wow! Hey!</td></tr>
+          </table>
+        </div>
+        <div class="gr-section">
+          <div class="gr-heading">Pronoun Cases</div>
+          <ul class="gr-list">
+            <li><strong>Subject:</strong> I, you, he, she, it, we, they — used as the subject of a verb</li>
+            <li><strong>Object:</strong> me, you, him, her, it, us, them — used as object of a verb or preposition</li>
+            <li><strong>Possessive:</strong> my/mine, your/yours, his, her/hers, its, our/ours, their/theirs — no apostrophe</li>
+          </ul>
+        </div>
+        <div class="gr-note">To choose between "I" and "me": remove the other person — "She gave it to John and I" → remove "John and" → "She gave it to I" (wrong) → use "me."</div>
+      </div>
+    </div>
+
+    <div class="accordion-item" id="acc-punct">
+      <div class="accordion-header" onclick="toggleAccordion('acc-punct')">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">✍️</span>
+          <span class="accordion-title">Punctuation</span>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="gr-section">
+          <table class="gr-table">
+            <tr><th>Mark</th><th>Use</th></tr>
+            <tr><td>Period (.)</td><td>Ends a declarative or imperative sentence</td></tr>
+            <tr><td>Comma (,)</td><td>Separates list items; joins independent clauses with a conjunction; follows introductory elements; sets off non-essential information</td></tr>
+            <tr><td>Semicolon (;)</td><td>Connects two related independent clauses; used in complex lists where items contain commas</td></tr>
+            <tr><td>Colon (:)</td><td>Introduces a list, explanation, or quotation — the clause before must be complete on its own</td></tr>
+            <tr><td>Apostrophe (')</td><td>Shows possession (cat's, James's) or contraction (it's = it is) — never for plurals</td></tr>
+            <tr><td>Em dash (—)</td><td>Sets off an emphatic aside — stronger than a comma, more informal than parentheses</td></tr>
+            <tr><td>Hyphen (-)</td><td>Joins compound modifiers before a noun (well-known author) and compound numbers (twenty-one)</td></tr>
+            <tr><td>Ellipsis (…)</td><td>Indicates omitted text or a trailing thought — use sparingly in professional writing</td></tr>
+          </table>
+        </div>
+        <div class="gr-section">
+          <div class="gr-heading">Oxford Comma &amp; Key Comma Rules</div>
+          <ul class="gr-list">
+            <li><strong>Oxford comma:</strong> use a comma before the final item in a list — "red, white, and blue"</li>
+            <li><strong>Introductory element:</strong> comma follows — "Although it rained, we went outside."</li>
+            <li><strong>Non-essential clause:</strong> surrounded by commas — "My brother, who lives in Paris, called."</li>
+            <li><strong>FANBOYS:</strong> comma before for, and, nor, but, or, yet, so when joining independent clauses</li>
+          </ul>
+        </div>
+        <div class="gr-note">American English: periods and commas go inside quotation marks. British English: only if they are part of the quoted material.</div>
+      </div>
+    </div>
+
+    <div class="accordion-item" id="acc-struct">
+      <div class="accordion-header" onclick="toggleAccordion('acc-struct')">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">🏗️</span>
+          <span class="accordion-title">Sentence Structure</span>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="gr-section">
+          <table class="gr-table">
+            <tr><th>Type</th><th>Structure</th><th>Example</th></tr>
+            <tr><td>Simple</td><td>One independent clause</td><td>"The cat sat."</td></tr>
+            <tr><td>Compound</td><td>Two independent clauses joined by a conjunction or semicolon</td><td>"The cat sat, and the dog stood."</td></tr>
+            <tr><td>Complex</td><td>One independent clause + one or more dependent clauses</td><td>"Although it rained, we went outside."</td></tr>
+            <tr><td>Compound-complex</td><td>Two+ independent clauses + at least one dependent clause</td><td>"Although it rained, we went outside, and we had a great time."</td></tr>
+          </table>
+        </div>
+        <div class="gr-section">
+          <div class="gr-heading">Common Structural Errors</div>
+          <ul class="gr-list">
+            <li><strong>Fragment:</strong> missing a subject or verb — "Running through the park." Fix: add what's missing.</li>
+            <li><strong>Run-on:</strong> two independent clauses with nothing between them — fix with a period, semicolon, or conjunction.</li>
+            <li><strong>Comma splice:</strong> two independent clauses joined by only a comma — add a conjunction or use a semicolon.</li>
+            <li><strong>Dangling modifier:</strong> a phrase that doesn't attach to the right noun — "Having finished the report, the meeting began." Who finished it?</li>
+            <li><strong>Broken parallel structure:</strong> items in a series must match grammatically — "hiking, swimming, and to run" → "hiking, swimming, and running."</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" id="acc-misused">
+      <div class="accordion-header" onclick="toggleAccordion('acc-misused')">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">⚠️</span>
+          <span class="accordion-title">Commonly Misused Words</span>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="gr-section">
+          <table class="gr-table">
+            <tr><th>Words</th><th>Rule</th></tr>
+            <tr><td>affect / effect</td><td><em>Affect</em> is usually the verb (to influence); <em>effect</em> is usually the noun (the result). "The rain affected our plans; the effect was a delay."</td></tr>
+            <tr><td>their / there / they're</td><td><em>Their</em> = possession; <em>there</em> = place or existence; <em>they're</em> = they are</td></tr>
+            <tr><td>its / it's</td><td><em>Its</em> = possessive (no apostrophe); <em>it's</em> = it is</td></tr>
+            <tr><td>your / you're</td><td><em>Your</em> = possessive; <em>you're</em> = you are</td></tr>
+            <tr><td>fewer / less</td><td><em>Fewer</em> for countable nouns (fewer words, fewer people); <em>less</em> for uncountable quantities (less water, less time)</td></tr>
+            <tr><td>who / whom</td><td><em>Who</em> = subject; <em>whom</em> = object. Test: replace with he/him — if "him" fits, use "whom."</td></tr>
+            <tr><td>lay / lie</td><td><em>Lay</em> = to place something (needs an object: "Lay the book down"); <em>lie</em> = to recline ("I need to lie down"). Past tense: laid / lay</td></tr>
+            <tr><td>that / which</td><td><em>That</em> introduces essential clauses (no comma); <em>which</em> introduces non-essential clauses (preceded by a comma)</td></tr>
+            <tr><td>imply / infer</td><td>The speaker <em>implies</em>; the listener <em>infers</em></td></tr>
+            <tr><td>should of</td><td>Always wrong — it's a mishearing of "should've" (should have)</td></tr>
+            <tr><td>comprise / compose</td><td>The whole <em>comprises</em> the parts; the parts <em>compose</em> the whole. Avoid "comprised of."</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" id="acc-caps">
+      <div class="accordion-header" onclick="toggleAccordion('acc-caps')">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">🔠</span>
+          <span class="accordion-title">Capitalization Rules</span>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="gr-section">
+          <ul class="gr-list">
+            <li><strong>First word of a sentence</strong> — always capitalize</li>
+            <li><strong>Proper nouns</strong> — specific people, places, organizations, brands: London, Nike, Shakespeare</li>
+            <li><strong>Titles before names</strong> — "President Biden" — but lowercase after: "Joe Biden, president"</li>
+            <li><strong>Days and months</strong> — Monday, January — but not seasons: spring, autumn</li>
+            <li><strong>The pronoun "I"</strong> — always capitalized</li>
+            <li><strong>Titles of works</strong> — capitalize major words; lowercase articles, short prepositions, and conjunctions unless first word</li>
+            <li><strong>Direct quotations</strong> — capitalize the first word of a fully quoted sentence</li>
+            <li><strong>Acronyms</strong> — typically all caps: NASA, CEO, FAQ</li>
+          </ul>
+        </div>
+        <div class="gr-note">Don't capitalize for emphasis — use italics or bold instead. Overcapitalization is a common business writing mistake: "Our Company values Innovation and Excellence."</div>
+      </div>
+    </div>
+
+    <div class="accordion-item" id="acc-numbers">
+      <div class="accordion-header" onclick="toggleAccordion('acc-numbers')">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">🔢</span>
+          <span class="accordion-title">Numbers in Writing</span>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="gr-section">
+          <ul class="gr-list">
+            <li><strong>Spell out one through nine;</strong> use numerals for 10 and above (AP/journalistic style)</li>
+            <li><strong>Never start a sentence with a numeral</strong> — spell it out or rewrite the sentence</li>
+            <li><strong>Always use numerals for:</strong> percentages (8%), ages (she is 4), measurements, times with a.m./p.m., statistics</li>
+            <li><strong>Be consistent when comparing:</strong> "the team had 3 wins and 14 losses" — not "three wins and 14 losses"</li>
+            <li><strong>Large round numbers:</strong> "about fifty people attended" vs. "exactly 47 people attended"</li>
+            <li><strong>Decades:</strong> the 1990s (no apostrophe) or the '90s (apostrophe replaces "19")</li>
+            <li><strong>Currency:</strong> $5, $5.50, $5 million — don't write "$5 dollars" (redundant)</li>
+            <li><strong>Fractions:</strong> spell out simple fractions in text — "two-thirds of respondents" — use numerals in technical contexts</li>
+          </ul>
+        </div>
+        <div class="gr-example">✓ The report covers 12 case studies across three continents.<br>✗ The report covers twelve case studies across 3 continents.</div>
+      </div>
+    </div>
+
+    <div class="accordion-item" id="acc-tone">
+      <div class="accordion-header" onclick="toggleAccordion('acc-tone')">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">🎯</span>
+          <span class="accordion-title">Tone &amp; Style</span>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="gr-section">
+          <div class="gr-heading">Active vs. Passive Voice</div>
+          <ul class="gr-list">
+            <li><strong>Active:</strong> subject acts — "She wrote the report." Clearer and more direct.</li>
+            <li><strong>Passive:</strong> subject receives action — "The report was written by her." Use when the actor is unknown or unimportant.</li>
+          </ul>
+        </div>
+        <div class="gr-section">
+          <div class="gr-heading">Concision — Cut These</div>
+          <table class="gr-table">
+            <tr><th>Wordy</th><th>Concise</th></tr>
+            <tr><td>due to the fact that</td><td>because</td></tr>
+            <tr><td>in order to</td><td>to</td></tr>
+            <tr><td>at this point in time</td><td>now</td></tr>
+            <tr><td>in the event that</td><td>if</td></tr>
+            <tr><td>on a daily basis</td><td>daily</td></tr>
+            <tr><td>the majority of</td><td>most</td></tr>
+            <tr><td>utilize</td><td>use</td></tr>
+            <tr><td>prior to</td><td>before</td></tr>
+          </table>
+        </div>
+        <div class="gr-section">
+          <div class="gr-heading">Formality Spectrum</div>
+          <ul class="gr-list">
+            <li><strong>Casual:</strong> contractions, colloquialisms, first person — social media, friendly emails</li>
+            <li><strong>Conversational:</strong> approachable but polished — blogs, newsletters, brand voice</li>
+            <li><strong>Professional:</strong> clear, precise, no slang — reports, business writing</li>
+            <li><strong>Formal/Academic:</strong> no contractions, third person — research papers, legal documents</li>
+          </ul>
+        </div>
+        <div class="gr-note">Avoid over-hedging in confident writing. "It seems that perhaps this might possibly be worth considering" — cut to "This is worth considering."</div>
+      </div>
+    </div>
+
+  </div><!-- end grammar -->
+
+  <!-- FIX THE SENTENCE -->
+  <div class="section" id="tab-fix">
+    <div class="fix-wrap">
+      <div id="fix-game">
+        <div class="fix-stats">
+          <div class="stat-card"><div class="stat-num" id="fix-score">0</div><div class="stat-label">Score</div></div>
+          <div class="stat-card"><div class="stat-num" id="fix-streak">0</div><div class="stat-label">Streak</div></div>
+          <div class="stat-card"><div class="stat-num" id="fix-qnum">1</div><div class="stat-label">Question</div></div>
+        </div>
+        <div class="fix-progress-bar-wrap"><div class="fix-progress-bar-fill" id="fix-progress-fill" style="width:0%"></div></div>
+        <div class="fix-q-label">Spot the error — choose the corrected version:</div>
+        <div class="fix-sentence-box" id="fix-sentence"></div>
+        <div class="fix-options" id="fix-options"></div>
+        <div class="fix-feedback" id="fix-feedback"></div>
+        <button class="fix-next-btn" id="fix-next" onclick="fixNext()">Next sentence →</button>
+      </div>
+      <div class="fix-complete" id="fix-complete" style="display:none;">
+        <div class="fix-complete-score" id="fix-final-score"></div>
+        <div class="fix-complete-label" id="fix-final-label"></div>
+        <button class="fix-restart-btn" onclick="fixRestart()">Play again</button>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <script>
@@ -497,7 +890,226 @@ function showTab(tab, btn) {
   if (tab === 'quiz') nextQuestion();
 }
 
+function toggleAccordion(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+/* FIX THE SENTENCE */
+const FIX_QUESTIONS = [
+  {
+    sentence: "Me and Sarah presented the report to the board.",
+    options: [
+      "Sarah and me presented the report to the board.",
+      "Sarah and I presented the report to the board.",
+      "I and Sarah presented the report to the board.",
+      "Me and Sarah have presented the report to the board."
+    ],
+    correct: 1,
+    explanation: "Use \"I\" as the subject pronoun. Test by removing \"Sarah and\" — \"I presented\" works; \"Me presented\" does not."
+  },
+  {
+    sentence: "Their going to announce the results tomorrow morning.",
+    options: [
+      "There going to announce the results tomorrow morning.",
+      "They're going to announce the results tomorrow morning.",
+      "Their gonna announce the results tomorrow morning.",
+      "Theyre going to announce the results tomorrow morning."
+    ],
+    correct: 1,
+    explanation: "\"They're\" = \"they are.\" \"Their\" shows possession; \"there\" indicates place or existence."
+  },
+  {
+    sentence: "We should of submitted the proposal by Friday.",
+    options: [
+      "We should of submitted the proposal before Friday.",
+      "We should have submitted the proposal by Friday.",
+      "We should've of submitted the proposal by Friday.",
+      "We should submitted the proposal by Friday."
+    ],
+    correct: 1,
+    explanation: "\"Should have\" (or \"should've\") is correct. \"Should of\" is a mishearing of the contraction — \"of\" is never part of a modal verb phrase."
+  },
+  {
+    sentence: "There were less people at the event than expected.",
+    options: [
+      "There was less people at the event than expected.",
+      "There were fewer people at the event than expected.",
+      "There were less peoples at the event than expected.",
+      "There were lesser people at the event than expected."
+    ],
+    correct: 1,
+    explanation: "Use \"fewer\" for countable nouns (people, items, words). Use \"less\" for uncountable quantities (water, time, effort)."
+  },
+  {
+    sentence: "The company released it's annual report last week.",
+    options: [
+      "The company released its' annual report last week.",
+      "The company released its annual report last week.",
+      "The company released it's' annual report last week.",
+      "The company released it is annual report last week."
+    ],
+    correct: 1,
+    explanation: "\"Its\" (no apostrophe) is the possessive pronoun. \"It's\" always means \"it is.\" Pronouns never use an apostrophe for possession."
+  },
+  {
+    sentence: "The new policy will effect our workflow significantly.",
+    options: [
+      "The new policy will affect our workflow significantly.",
+      "The new policy will effects our workflow significantly.",
+      "The new policy will affected our workflow significantly.",
+      "The new policy will be effecting our workflow."
+    ],
+    correct: 0,
+    explanation: "\"Affect\" is the verb (to influence); \"effect\" is usually the noun (the result). \"The policy will affect our workflow\" is correct."
+  },
+  {
+    sentence: "Each of the team members were given a revised brief.",
+    options: [
+      "Each of the team members was given a revised brief.",
+      "Each of the team member were given a revised brief.",
+      "Each of the team members are given a revised brief.",
+      "Each of the team members have been given a revised brief."
+    ],
+    correct: 0,
+    explanation: "\"Each\" is always singular and takes a singular verb: \"was given,\" not \"were given.\" The phrase \"of the team members\" doesn't change this."
+  },
+  {
+    sentence: "Having finished the report, the meeting could begin.",
+    options: [
+      "Having finished the report, we could begin the meeting.",
+      "Having finished the report, the meeting can begin.",
+      "The meeting could begin, having finished the report.",
+      "Having finishing the report, the meeting could begin."
+    ],
+    correct: 0,
+    explanation: "This is a dangling modifier — the meeting didn't finish the report; the people did. Adding \"we\" gives the modifier a proper subject to attach to."
+  },
+  {
+    sentence: "I love this job it keeps me motivated every single day.",
+    options: [
+      "I love this job, it keeps me motivated every single day.",
+      "I love this job; it keeps me motivated every single day.",
+      "I love this job, but it keeps me motivated every single day.",
+      "I love this job it keeps me motivated, every single day."
+    ],
+    correct: 1,
+    explanation: "This is a run-on sentence — two independent clauses joined without punctuation. A semicolon correctly connects them. A comma alone creates a comma splice."
+  },
+  {
+    sentence: "The employees that complained about the policy were reassigned.",
+    options: [
+      "The employees which complained about the policy were reassigned.",
+      "The employees who complained about the policy were reassigned.",
+      "The employees whom complained about the policy were reassigned.",
+      "The employees whose complained about the policy were reassigned."
+    ],
+    correct: 1,
+    explanation: "Use \"who\" (or \"whom\") for people — not \"that\" or \"which.\" While \"that\" is sometimes accepted, \"who\" is always preferred when referring to people."
+  },
+  {
+    sentence: "The Smith's are coming to dinner on Saturday night.",
+    options: [
+      "The Smith's is coming to dinner on Saturday night.",
+      "The Smiths are coming to dinner on Saturday night.",
+      "The Smiths' are coming to dinner on Saturday night.",
+      "The Smiths's are coming to dinner on Saturday night."
+    ],
+    correct: 1,
+    explanation: "To make a surname plural, just add \"s\" — no apostrophe needed. Apostrophes show possession (\"the Smiths' house\"), not plurality."
+  },
+  {
+    sentence: "She almost drove her kids to school every day last year.",
+    options: [
+      "She drove her kids almost to school every day last year.",
+      "She drove almost her kids to school every day last year.",
+      "She drove her kids to school almost every day last year.",
+      "She almost drives her kids to school every day last year."
+    ],
+    correct: 2,
+    explanation: "\"Almost\" is misplaced — it modifies \"drove,\" implying she nearly drove them but didn't. Moving it before \"every day\" gives the intended meaning: she did this most days."
+  }
+];
+
+let fixIndex = 0, fixScore = 0, fixStreak = 0, fixAnswered = false, fixOrder = [];
+
+function fixInit() {
+  fixIndex = 0;
+  fixScore = 0;
+  fixStreak = 0;
+  fixAnswered = false;
+  fixOrder = [...Array(FIX_QUESTIONS.length).keys()].sort(() => Math.random() - 0.5);
+  document.getElementById('fix-score').textContent = '0';
+  document.getElementById('fix-streak').textContent = '0';
+  document.getElementById('fix-complete').style.display = 'none';
+  document.getElementById('fix-game').style.display = '';
+  renderFixQuestion();
+}
+
+function renderFixQuestion() {
+  fixAnswered = false;
+  const q = FIX_QUESTIONS[fixOrder[fixIndex]];
+  document.getElementById('fix-sentence').textContent = q.sentence;
+  document.getElementById('fix-feedback').textContent = '';
+  document.getElementById('fix-next').classList.remove('visible');
+  document.getElementById('fix-qnum').textContent = fixIndex + 1;
+  document.getElementById('fix-progress-fill').style.width = (fixIndex / FIX_QUESTIONS.length * 100) + '%';
+  const optOrder = [...Array(q.options.length).keys()].sort(() => Math.random() - 0.5);
+  document.getElementById('fix-options').innerHTML = optOrder.map(i =>
+    `<button class="fix-opt" data-idx="${i}" onclick="checkFix(this,${i})">${q.options[i]}</button>`
+  ).join('');
+}
+
+function checkFix(btn, chosen) {
+  if (fixAnswered) return;
+  fixAnswered = true;
+  const q = FIX_QUESTIONS[fixOrder[fixIndex]];
+  const correct = chosen === q.correct;
+  document.querySelectorAll('.fix-opt').forEach(b => {
+    b.disabled = true;
+    if (parseInt(b.dataset.idx) === q.correct) b.classList.add('correct');
+  });
+  if (!correct) { btn.classList.remove('correct'); btn.classList.add('wrong'); }
+  if (correct) {
+    fixScore++;
+    fixStreak++;
+    document.getElementById('fix-feedback').textContent = '✓ Correct! ' + q.explanation;
+  } else {
+    fixStreak = 0;
+    document.getElementById('fix-feedback').textContent = '✗ Not quite. ' + q.explanation;
+  }
+  document.getElementById('fix-score').textContent = fixScore;
+  document.getElementById('fix-streak').textContent = fixStreak;
+  document.getElementById('fix-next').classList.add('visible');
+}
+
+function fixNext() {
+  fixIndex++;
+  if (fixIndex >= FIX_QUESTIONS.length) {
+    showFixComplete();
+  } else {
+    renderFixQuestion();
+  }
+}
+
+function showFixComplete() {
+  document.getElementById('fix-game').style.display = 'none';
+  const total = FIX_QUESTIONS.length;
+  document.getElementById('fix-final-score').textContent = fixScore + ' / ' + total;
+  const pct = fixScore / total;
+  document.getElementById('fix-final-label').textContent =
+    pct === 1   ? 'Perfect score. Flawless grammar!' :
+    pct >= 0.75 ? 'Excellent — strong grammar foundation.' :
+    pct >= 0.5  ? 'Good work — a few rules worth revisiting.' :
+                  'Keep practicing — check the Grammar Reference tab for help.';
+  document.getElementById('fix-complete').style.display = 'block';
+}
+
+function fixRestart() {
+  fixInit();
+}
+
 loadWords();
+fixInit();
 </script>
 </body>
 </html>
